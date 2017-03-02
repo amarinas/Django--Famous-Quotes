@@ -70,7 +70,8 @@ def listquotes(request, id):
     counts= len(Quotes.objects.filter(creator__id=quote))
 
     allquotes = Quotes.objects.filter(creator__id=quote).order_by('-created_at')
-    context = {'loguser': Users.objects.get(id=request.session['userid']),
+    context = {
+               'loguser': Users.objects.get(id=request.session['userid']),
                'allquotes': allquotes,
                'quotecreator': quote,
                'creator': allquotes[0].creator.first_name,
@@ -90,6 +91,6 @@ def addfavorite(request, qid):
 def removequote(request, id):
     if 'userid' not in request.session:
         return redirect('/')
-    Quotes.objects.filter(id=id).filter().delete()
-
+    remove = Users.objects.get(id=request.session['userid'])
+    remove.users_favorite.get(id=id).delete()
     return redirect('/process')

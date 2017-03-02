@@ -44,14 +44,15 @@
 
           <div class="row">
             <div class="col-sm-6" style="background-color:yellow;">
+              <h3>Quotable Quotes:</h3>
               {% for quotes in allquotes %}
-              {% if loguser not in quotes.favorited.all %}
+              {% if loguser not in quotes.favorited.all  %}
               <p>"{{quotes.content}}"<p>
                 <p>--{{quotes.quoteby}} </p>
                 <h6>posted by: <a href="/listquotes/{{quotes.id}}" >{{quotes.creator.first_name}}</a></h6>
                 <form action='/addfavorite/{{quotes.id}}' method='post'>
                    {% csrf_token %}
-                  <input type="submit" class="btn" name ="addme" value="Add to my list">
+                  <input type="submit" class="btn" name ="addme" value="Add to my favorite list">
                 </form>
                 {% endif %}
               {% endfor %}
@@ -65,7 +66,7 @@
               <p>{{quotes.content}}<p>
                 <p>--{{quotes.quoteby}} </p>
                 <h6>posted by: <a href="/listquotes/{{quotes.id}}" >{{quotes.creator.first_name}}</a></h6>
-                <a href="/removequote/{{quotes.id}}" >remove me from here</a>
+                <a href="/removequote/{{quotes.id}}" class="btn btn-default" >remove me from here</a>
                 {% endif %}
               {% endfor %}
             </div>

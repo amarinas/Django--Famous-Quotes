@@ -11,7 +11,6 @@ urlpatterns = [
     url(r'^listquotes/(?P<id>\d+)$', views.listquotes),
     url(r'^addfavorite/(?P<qid>\d+)$', views.addfavorite),
     url(r'^removequote/(?P<id>\d+)$', views.removequote),
-
-    # url(r'^.+$', views.any, name='any')
+    url(r'^.+$', views.any, name='any')
 
 ]
