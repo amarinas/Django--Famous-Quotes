@@ -92,5 +92,6 @@ def removequote(request, id):
     if 'userid' not in request.session:
         return redirect('/')
     remove = Users.objects.get(id=request.session['userid'])
-    remove.users_favorite.get(id=id).delete()
+    thisquote = Quotes.objects.get(id=id)
+    remove.users_favorite.remove(thisquote)
     return redirect('/process')
